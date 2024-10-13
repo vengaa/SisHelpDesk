@@ -6,8 +6,8 @@ import me.sishelpdesk.SisHelpDesk.domain.enums.Perfil;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,7 +32,7 @@ public abstract class Pessoa implements Serializable {
     protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    protected LocalDate dataCriacao = LocalDate.now();
+    protected LocalDateTime dataCriacao = LocalDateTime.now();
 
     public Pessoa() {
         super();
@@ -97,11 +97,11 @@ public abstract class Pessoa implements Serializable {
         this.perfis.add(perfil.getCodigo());
     }
 
-    public LocalDate getDataCriacao() {
+    public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
+    public void setDataCriacao(LocalDateTime dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 

@@ -7,6 +7,7 @@ import me.sishelpdesk.SisHelpDesk.domain.enums.Status;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Chamado implements Serializable {
@@ -17,9 +18,9 @@ public class Chamado implements Serializable {
     private Integer id;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    private LocalDate dataAbertura = LocalDate.now();
+    private LocalDateTime dataAbertura = LocalDateTime.now();
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    private LocalDate dataFechamento;
+    private LocalDateTime dataFechamento;
 
     private Prioridade prioridade;
     private Status status;
@@ -58,19 +59,19 @@ public class Chamado implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDataAbertura() {
+    public LocalDateTime getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(LocalDate dataAbertura) {
+    public void setDataAbertura(LocalDateTime dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public LocalDate getDataFechamento() {
+    public LocalDateTime getDataFechamento() {
         return dataFechamento;
     }
 
-    public void setDataFechamento(LocalDate dataFechamento) {
+    public void setDataFechamento(LocalDateTime dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
 
