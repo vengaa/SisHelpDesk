@@ -7,29 +7,23 @@ import me.sishelpdesk.SisHelpDesk.domain.enums.Status;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
 public class Chamado implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonFormat(pattern = "dd/MM/aaaa HH:mm:ss")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataAbertura = LocalDate.now();
-
-    @JsonFormat(pattern = "dd/MM/aaaa HH:mm:ss")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFechamento;
 
     private Prioridade prioridade;
-
     private Status status;
-
     private String titulo;
-
     private String observacoes;
 
     @ManyToOne
@@ -41,16 +35,19 @@ public class Chamado implements Serializable {
     private Cliente cliente;
 
     public Chamado() {
+        super();
     }
 
-    public Chamado(Cliente cliente, Tecnico tecnico, String observacoes, String titulo, Status status, Prioridade prioridade, Integer id) {
-        this.cliente = cliente;
-        this.tecnico = tecnico;
-        this.observacoes = observacoes;
-        this.titulo = titulo;
-        this.status = status;
-        this.prioridade = prioridade;
+    public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico,
+                   Cliente cliente) {
+        super();
         this.id = id;
+        this.prioridade = prioridade;
+        this.status = status;
+        this.titulo = titulo;
+        this.observacoes = observacoes;
+        this.tecnico = tecnico;
+        this.cliente = cliente;
     }
 
     public Integer getId() {
@@ -126,15 +123,28 @@ public class Chamado implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Chamado chamado = (Chamado) o;
-        return Objects.equals(id, chamado.id);
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Chamado other = (Chamado) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
+
 }
